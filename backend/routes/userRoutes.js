@@ -1,0 +1,13 @@
+const express = require('express');
+const { register, login } = require('../controllers/authController');
+const { bookAppointment, sendMessage } = require('../controllers/userController');
+const { protect } = require('../middleware/authMiddleware');
+
+const router = express.Router();
+
+router.post('/register', register);
+router.post('/login', login);
+router.post('/appointments', protect, bookAppointment);
+router.post('/messages', protect, sendMessage);
+
+module.exports = router;
